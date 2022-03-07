@@ -1,0 +1,18 @@
+{application, github_webhook_service,
+ [{description, "An OTP application"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {mod, {github_webhook_service_app, []}},
+  {applications,
+   [kernel,
+    stdlib,
+    cowboy,
+    jsx,
+    epgsql
+   ]},
+  {env,[]},
+  {modules, []},
+
+  {licenses, ["Apache 2.0"]},
+  {links, []}
+ ]}.
