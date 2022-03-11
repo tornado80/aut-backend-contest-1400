@@ -5,6 +5,7 @@ import docker
 import sys
 import subprocess
 import judge
+from time import sleep
 
 technology = sys.argv[1]
 delivery = sys.argv[2]
@@ -95,6 +96,7 @@ def do_judge():
         test_name = ' '.join(test.split('_')).title()
         try:
             before()
+            subprocess.run("while ! httping -qc1 http://localhost:8000 ; do sleep 1 ; done", shell=True, timeout=10)
             getattr(j, test)()
             total = total + score
             print(f'{i}. {test_name}: PASSED')
