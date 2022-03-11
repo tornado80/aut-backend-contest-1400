@@ -39,6 +39,7 @@ start_link() ->
     gen_server:start_link({local, ?SERVER}, ?MODULE, [], []).
 
 init([]) ->
+    filelib:ensure_dir("/home/amirhosein/judge/"),
     {ok, #submission_queue_state{
         queue = [],
         current = none}}.
@@ -105,19 +106,22 @@ fill_submission_with_team_id(Submission = #submission{repository = Repository}) 
         score = 0
     }.
 
-judge(#submission{
-    repository = Repository = #submission_repository{
-        delivery_guid = Delivery,
-        repository_clone_url = RepositoryCloneUrl,
-        repository_name = RepositoryName,
-        head_commit_id = HeadCommitId
-    },
-    team = Team = #submission_team{
-        team_technology = Technology
-    },
-    score = Score}) ->
-    Command = io_lib:format("conda run -n judge_environment python3 main.py ~p ~p ~p ~p ~p",
-        [<<"django">>, Delivery, RepositoryCloneUrl, RepositoryName, HeadCommitId]),
+judge(
+    #submission{
+        repository = Repository = #submission_repository{
+            delivery_guid = Delivery,
+            repository_clone_url = RepositoryCloneUrl,
+            repository_name = RepositoryName,
+            head_commit_id = HeadCommitId
+        },
+        team = Team = #submission_team{
+            team_technology = Technology
+        },
+        score = Score}
+    ) ->
+    Command = io_lib:format("conda activate judge-environment && python3 main.py ~p ~p ~p ~p ~p > /home/amirhosein/judge/~p.log",
+        [<<"django">>, Delivery, RepositoryCloneUrl, RepositoryName, HeadCommitId, Delivery]),
+    file:write_file("result.json", jsx:encode(#{<<"score">> => 0})),
     Result = os:cmd(Command),
     Score = maps:get(<<"score">>, jsx:decode(file:read_file("result.json"))),
     NewSubmission = #submission{
@@ -125,7 +129,10 @@ judge(#submission{
         team = Team,
         score = Score
     },
-    judge_done(Status, NewSubmission).
+    case Score < 0 of
+        true -> judge_done(<<"failed">>, Result, NewSubmission);
+        false -> judge_done(<<"judged">>, Result, NewSubmission)
+    end.
 
-judge_done(Status, Submission) ->
-    gen_server:cast(?MODULE, {judge_done, Status, Submission}).
+judge_done(Status, Result, Submission) ->
+    gen_server:cast(?MODULE, {judge_done, Status, Result, Submission}).

@@ -1,3 +1,4 @@
+import json
 import os
 import shutil
 import docker
@@ -37,12 +38,12 @@ def clone():
     os.mkdir(delivery_path)
     result = subprocess.run(
         f"git clone {clone_url} && cd {repo_name} && git checkout {commit_id}",
-        capture_output=True,
+        capture_output=False,
         cwd=delivery_path,
         shell=True
     )
-    if result.returncode == 0:
-        print(-1)
+    if result.returncode != 0:
+        print(result.stderr)
         sys.exit(1)
 
 
@@ -55,33 +56,32 @@ def prepare():
         shutil.copy("./django/base-requirements.txt", repo_path)
         shutil.copy("./django/entrypoint.sh", repo_path)
     elif technology == "dotnet":
-        print(-1)
         sys.exit(1)
 
 
 def before():
     result = subprocess.run(
         "/usr/local/bin/docker-compose up -d",
-        capture_output=True,
+        capture_output=False,
         cwd=delivery_path,
         shell=True,
         env={"REPONAME": repo_name}
     )
-    if result.returncode == 0:
-        print(-1)
+    if result.returncode != 0:
+        print(result.stderr)
         sys.exit(1)
 
 
 def after():
     result = subprocess.run(
         "/usr/local/bin/docker-compose down",
-        capture_output=True,
+        capture_output=False,
         cwd=delivery_path,
         shell=True,
         env={"REPONAME": repo_name}
     )
-    if result.returncode == 0:
-        print(-1)
+    if result.returncode != 0:
+        print(result.stderr)
         sys.exit(1)
 
 
@@ -94,13 +94,16 @@ def do_judge():
     for i, (test, score) in enumerate(judge.tests, 1):
         try:
             before()
-            getattr(judge, test)()
+            getattr(j, test)()
             total = total + score
         except Exception:
             pass
         finally:
             after()
+    with open("result.json", "w") as f:
+        f.write(json.dumps({"score" : total}))
     clear()
+
 
 
 do_judge()
