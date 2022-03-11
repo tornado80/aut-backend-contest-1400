@@ -47,15 +47,17 @@ check_event_type(<<"push">>, Delivery, Req, State) ->
     RepositoryOwner = maps:get(<<"owner">>, Repository),
     HeadCommit = maps:get(<<"head_commit">>, Json),
     Submission = #submission{
-        delivery_guid = Delivery,
-        repository_clone_url = maps:get(<<"clone_url">>, Repository),
-        repository_name = maps:get(<<"name">>, Repository),
-        repository_full_name = maps:get(<<"full_name">>, Repository),
-        repository_owner_login = maps:get(<<"login">>, RepositoryOwner),
-        head_commit_id = maps:get(<<"id">>, HeadCommit),
-        pushed_at_timestamp = maps:get(<<"pushed_at">>, Repository),
-        head_commit_message = maps:get(<<"message">>, HeadCommit),
-        head_commit_timestamp = maps:get(<<"timestamp">>, HeadCommit)
+        repository = #submission_repository{
+            delivery_guid = Delivery,
+            repository_clone_url = maps:get(<<"clone_url">>, Repository),
+            repository_name = maps:get(<<"name">>, Repository),
+            repository_full_name = maps:get(<<"full_name">>, Repository),
+            repository_owner_login = maps:get(<<"login">>, RepositoryOwner),
+            head_commit_id = maps:get(<<"id">>, HeadCommit),
+            pushed_at_timestamp = maps:get(<<"pushed_at">>, Repository),
+            head_commit_message = maps:get(<<"message">>, HeadCommit),
+            head_commit_timestamp = maps:get(<<"timestamp">>, HeadCommit)
+        }
     },
     submission_queue:enqueue(Submission),
     {true, Req, State};

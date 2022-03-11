@@ -22,6 +22,6 @@ create_database_connection() ->
 
 query(DBConnection, Query, Parameters) ->
     case epgsql:equery(DBConnection, Query, Parameters) of
-        {error, Error} -> lager:error("Database query error: ~p", [Error]), error;
+        {error, Error} -> lager:error("Database query error: ~p when query was ~p", [Error, Query]), error;
         Other -> Other
     end.

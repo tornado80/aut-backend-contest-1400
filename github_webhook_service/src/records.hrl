@@ -9,6 +9,18 @@
 -author("amirhosein").
 
 -record(submission, {
+    repository,
+    team,
+    score
+}).
+
+-record(submission_team, {
+    team_technology,
+    team_id,
+    team_name
+}).
+
+-record(submission_repository, {
     delivery_guid,
     repository_full_name,
     repository_name,
@@ -17,10 +29,5 @@
     head_commit_id,
     head_commit_message,
     head_commit_timestamp, % string
-    pushed_at_timestamp, % integer
-    score,
-    team_technology,
-    team_id,
-    team_name,
-    test_case
+    pushed_at_timestamp % integer
 }).
