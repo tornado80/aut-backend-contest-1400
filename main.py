@@ -86,12 +86,13 @@ def after():
 
 
 def do_judge():
-    j = judge.Judge("http://127.0.0.1:8000")
+    j = judge.Judge("http://localhost:8000")
     clear()
     clone()
     prepare()
     total = 0
     for i, (test, score) in enumerate(judge.tests, 1):
+        test_name = ' '.join(test.split('_')).title()
         try:
             before()
             getattr(j, test)()
