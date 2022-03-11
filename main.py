@@ -25,14 +25,14 @@ def clear():
     for container in client.containers.list():
         if container.status == "running":
             container.stop()
-        container.remove()
+        container.remove(force=True)
 
     # clear images except "python:3.9.6-alpine" and "postgres:13.0-alpine"
     for image in client.images.list():
         if len(image.tags) == 0:
-            client.images.remove(image.short_id)
+            client.images.remove(image.short_id, force=True)
         elif image.tags[0] not in ["python:3.9.6-alpine", "postgres:13.0-alpine"]:
-            client.images.remove(image.short_id)
+            client.images.remove(image.short_id, force=True)
 
 
 def clone():
@@ -41,9 +41,13 @@ def clone():
         f"git clone {clone_url} && cd {repo_name} && git checkout {commit_id}",
         capture_output=False,
         cwd=delivery_path,
-        shell=True
+        shell=True,
+        stdout=sys.stdout,
+        stderr=sys.stderr
     )
     if result.returncode != 0:
+        with open("result.json", "w") as f:
+            f.write(json.dumps({"score" : total}))
         print(result.stderr)
         sys.exit(1)
 
@@ -57,6 +61,8 @@ def prepare():
         shutil.copy("./django/base-requirements.txt", repo_path)
         shutil.copy("./django/entrypoint.sh", repo_path)
     elif technology == "dotnet":
+        with open("result.json", "w") as f:
+            f.write(json.dumps({"score" : total}))
         sys.exit(1)
 
 
@@ -66,9 +72,13 @@ def before():
         capture_output=False,
         cwd=delivery_path,
         shell=True,
+        stdout=sys.stdout,
+        stderr=sys.stderr,
         env={"REPONAME": repo_name}
     )
     if result.returncode != 0:
+        with open("result.json", "w") as f:
+            f.write(json.dumps({"score" : total}))
         print(result.stderr)
         sys.exit(1)
 
@@ -79,10 +89,13 @@ def after():
         capture_output=False,
         cwd=delivery_path,
         shell=True,
+        stdout=sys.stdout,
+        stderr=sys.stderr,
         env={"REPONAME": repo_name}
     )
     if result.returncode != 0:
-        print(result.stderr)
+        with open("result.json", "w") as f:
+            f.write(json.dumps({"score" : total}))
         sys.exit(1)
 
 

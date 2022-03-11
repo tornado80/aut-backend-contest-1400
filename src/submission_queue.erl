@@ -119,11 +119,12 @@ judge(
         },
         score = Score}
     ) ->
-    Command = io_lib:format("conda activate judge-environment && python3 main.py ~p ~p ~p ~p ~p > /home/amirhosein/judge/~p.log",
+    Command = io_lib:format("conda run -n judge-environment --no-capture-output --live-stream python main.py ~s ~s ~s ~s ~s &> /home/amirhosein/judge/~s.log",
         [<<"django">>, Delivery, RepositoryCloneUrl, RepositoryName, HeadCommitId, Delivery]),
     file:write_file("result.json", jsx:encode(#{<<"score">> => 0})),
-    Result = os:cmd(Command),
-    Score = maps:get(<<"score">>, jsx:decode(file:read_file("result.json"))),
+    Result = os:cmd(lists:flatten(Command)),
+    {ok, Content} = file:read_file("result.json"),
+    Score = maps:get(<<"score">>, jsx:decode(Content)),
     NewSubmission = #submission{
         repository = Repository,
         team = Team,
