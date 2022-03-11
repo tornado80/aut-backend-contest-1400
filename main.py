@@ -102,7 +102,7 @@ def do_judge():
             print(f'{i}. {test_name}: FAILED')
         finally:
             after()
-    print(f'\nTotal score: {total}/{sum(score for test, score in tests)}')
+    print(f'\nTotal score: {total}/{sum(score for test, score in judge.tests)}')
     with open("result.json", "w") as f:
         f.write(json.dumps({"score" : total}))
     clear()
