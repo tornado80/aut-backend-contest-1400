@@ -1,0 +1,24 @@
+2022-03-11 10:04:25 =SUPERVISOR REPORT====
+     Supervisor: {local,github_webhook_service_sup}
+     Context:    start_error
+     Reason:     {{badmatch,error},[{cache_service,load_cache,0,[{file,"/home/amirhosein/Documents/aut-backend-contest-1400/github_webhook_service/src/cache_service.erl"},{line,57}]},{cache_service,init,1,[{file,"/home/amirhosein/Documents/aut-backend-contest-1400/github_webhook_service/src/cache_service.erl"},{line,30}]},{gen_server,init_it,2,[{file,"gen_server.erl"},{line,423}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,390}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}
+     Offender:   [{pid,undefined},{id,cache_service},{mfargs,{cache_service,start_link,[]}},{restart_type,permanent},{significant,false},{shutdown,5000},{child_type,worker}]
+
+2022-03-11 10:08:51 =SUPERVISOR REPORT====
+     Supervisor: {local,github_webhook_service_sup}
+     Context:    start_error
+     Reason:     {{badmatch,error},[{cache_service,load_cache,0,[{file,"/home/amirhosein/Documents/aut-backend-contest-1400/github_webhook_service/src/cache_service.erl"},{line,57}]},{cache_service,init,1,[{file,"/home/amirhosein/Documents/aut-backend-contest-1400/github_webhook_service/src/cache_service.erl"},{line,30}]},{gen_server,init_it,2,[{file,"gen_server.erl"},{line,423}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,390}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}
+     Offender:   [{pid,undefined},{id,cache_service},{mfargs,{cache_service,start_link,[]}},{restart_type,permanent},{significant,false},{shutdown,5000},{child_type,worker}]
+
+2022-03-11 10:12:54 =SUPERVISOR REPORT====
+     Supervisor: {local,github_webhook_service_sup}
+     Context:    start_error
+     Reason:     {{badmatch,error},[{cache_service,load_cache,0,[{file,"/home/amirhosein/Documents/aut-backend-contest-1400/github_webhook_service/src/cache_service.erl"},{line,57}]},{cache_service,init,1,[{file,"/home/amirhosein/Documents/aut-backend-contest-1400/github_webhook_service/src/cache_service.erl"},{line,30}]},{gen_server,init_it,2,[{file,"gen_server.erl"},{line,423}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,390}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}
+     Offender:   [{pid,undefined},{id,cache_service},{mfargs,{cache_service,start_link,[]}},{restart_type,permanent},{significant,false},{shutdown,5000},{child_type,worker}]
+
+2022-03-11 10:47:00 =SUPERVISOR REPORT====
+     Supervisor: {local,github_webhook_service_sup}
+     Context:    start_error
+     Reason:     {{badmatch,error},[{cache_service,load_cache,0,[{file,"/home/amirhosein/Documents/aut-backend-contest-1400/github_webhook_service/src/cache_service.erl"},{line,57}]},{cache_service,init,1,[{file,"/home/amirhosein/Documents/aut-backend-contest-1400/github_webhook_service/src/cache_service.erl"},{line,30}]},{gen_server,init_it,2,[{file,"gen_server.erl"},{line,423}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,390}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}
+     Offender:   [{pid,undefined},{id,cache_service},{mfargs,{cache_service,start_link,[]}},{restart_type,permanent},{significant,false},{shutdown,5000},{child_type,worker}]
+
