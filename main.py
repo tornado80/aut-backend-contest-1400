@@ -96,14 +96,14 @@ def do_judge():
             before()
             getattr(j, test)()
             total = total + score
+            print(f'{i}. {test_name}: PASSED')
         except Exception:
-            pass
+            print(f'{i}. {test_name}: FAILED')
         finally:
             after()
+    print(f'\nTotal score: {total}/{sum(score for test, score in tests)}')
     with open("result.json", "w") as f:
         f.write(json.dumps({"score" : total}))
     clear()
-
-
 
 do_judge()
