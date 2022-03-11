@@ -9,6 +9,8 @@
 -module(payload_handler).
 -author("amirhosein").
 
+-include("records.hrl").
+
 %% API
 -export([
     init/2,
@@ -30,18 +32,33 @@ content_types_accepted(Req, State) ->
         {<<"application/json">>, handle_payload}
     ], Req, State}.
 
+% TODO: only allow GitHub to send requests from nginx
 handle_payload(Req, State) ->
-    {Ip, Port} = cowboy_req:peer(Req),
-    Headers = cowboy_req:headers(Req),
     Event = cowboy_req:header(<<"x-github-event">>, Req),
     Delivery = cowboy_req:header(<<"x-github-delivery">>, Req),
-    {ok, Body, _Req} = cowboy_req:read_body(Req),
-    Json = convert_to_json(Body),
-    io:format("~nIP:Port: ~p:~p~nHeaders: ~p~nEvent: ~p~nDelivery: ~p~nBody: ~p~nJson: ~p~n", [Ip, Port, Headers, Event, Delivery, Body, Json]),
-    {true, Req, State}.
+    check_event_type(Event, Delivery, Req, State).
 
-convert_to_json(Body) ->
-    case jsx:is_json(Body) of
-        true -> jsx:decode(Body);
-        false -> undefined
-    end.
+%%%%%%%%%%%%%%%%%%%%%%%% Internal functions  %%%%%%%%%%%%%%%%%%%%%%%%
+
+check_event_type(<<"push">>, Delivery, Req, State) ->
+    {ok, Body, _Req} = cowboy_req:read_body(Req),
+    Json = jsx:decode(Body),
+    Repository = maps:get(<<"repository">>, Json),
+    RepositoryOwner = maps:get(<<"owner">>, Repository),
+    HeadCommit = maps:get(<<"head_commit">>, Json),
+    Submission = #submission{
+        delivery_guid = Delivery,
+        repository_clone_url = maps:get(<<"clone_url">>, Repository),
+        repository_name = maps:get(<<"name">>, Repository),
+        repository_full_name = maps:get(<<"full_name">>, Repository),
+        repository_owner_login = maps:get(<<"login">>, RepositoryOwner),
+        head_commit_id = maps:get(<<"id">>, HeadCommit),
+        pushed_at_timestamp = maps:get(<<"pushed_at">>, Repository),
+        head_commit_message = maps:get(<<"message">>, HeadCommit),
+        head_commit_timestamp = maps:get(<<"timestamp">>, HeadCommit)
+    },
+    submission_queue:enqueue(Submission),
+    {true, Req, State};
+check_event_type(_, _Delivery, Req, State) ->
+    cowboy_req:reply(400, Req),
+    {false, Req, State}.

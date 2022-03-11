@@ -1,3 +1,4 @@
+{"1.2.0",
 [{<<"cowboy">>,
   {git,"git://github.com/ninenines/cowboy.git",
        {ref,"04ca4c5d31a92d4d3de087bbd7d6021dc4a6d409"}},
@@ -10,11 +11,26 @@
   {git,"https://github.com/epgsql/epgsql.git",
        {ref,"f7530f63ae40ea2b81bae7d4a33292212349b761"}},
   0},
+ {<<"goldrush">>,{pkg,<<"goldrush">>,<<"0.1.9">>},1},
  {<<"jsx">>,
   {git,"https://github.com/talentdeficit/jsx.git",
        {ref,"a45c997cedc3bcc0bb014ac3faa7ec16bcd4f7b1"}},
   0},
+ {<<"lager">>,
+  {git,"git@github.com:erlang-lager/lager.git",
+       {ref,"c5447d2d85a0d446d41a79bffe0a6a66bd50c901"}},
+  0},
+ {<<"meck">>,
+  {git,"git://github.com/eproxus/meck.git",
+       {ref,"5aaa24886db404f995c9a91b421367f6bfe6e566"}},
+  0},
  {<<"ranch">>,
   {git,"https://github.com/ninenines/ranch",
        {ref,"a692f44567034dacf5efcaa24a24183788594eb7"}},
-  1}].
+  1}]}.
+[
+{pkg_hash,[
+ {<<"goldrush">>, <<"F06E5D5F1277DA5C413E84D5A2924174182FB108DABB39D5EC548B27424CD106">>}]},
+{pkg_hash_ext,[
+ {<<"goldrush">>, <<"99CB4128CFFCB3227581E5D4D803D5413FA643F4EB96523F77D9E6937D994CEB">>}]}
+].

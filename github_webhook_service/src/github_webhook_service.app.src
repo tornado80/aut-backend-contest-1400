@@ -8,11 +8,15 @@
     stdlib,
     cowboy,
     jsx,
-    epgsql
+    epgsql,
+    meck,
+    lager
    ]},
-  {env,[]},
+  {env,[
+   {database_credentials, "database_credentials.config"},
+   {judge_config, "judge.config"}
+  ]},
   {modules, []},
-
   {licenses, ["Apache 2.0"]},
   {links, []}
  ]}.
