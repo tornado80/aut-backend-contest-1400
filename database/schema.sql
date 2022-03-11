@@ -1,9 +1,7 @@
-CREATE USER judge_user WITH PASSWORD 'judge_password';
+CREATE USER judge_user WITH SUPERUSER PASSWORD 'judge_password';
 CREATE DATABASE judge_db WITH OWNER = judge_user ENCODING = 'UTF8';
 
 \c judge_db
-
-GRANT ALL ON DATABASE judge_db TO judge_user;
 
 CREATE TABLE "team" (
 	"id" serial PRIMARY KEY,
@@ -41,4 +39,5 @@ CREATE TABLE "submission" (
 	CONSTRAINT fk_team_id FOREIGN KEY ("team_id") REFERENCES "team" ("id")
 );
 
-
+GRANT ALL PRIVILEGES ON DATABASE judge_db TO judge_user;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO judge_user;

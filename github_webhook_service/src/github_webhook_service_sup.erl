@@ -30,7 +30,9 @@ init([]) ->
                  intensity => 10,
                  period => 1},
     ChildSpecs = [
-        #{id => submission_queue, start => {submission_queue, start_link, []}}
+        #{id => submission_queue, start => {submission_queue, start_link, []}},
+        #{id => database_service, start => {database_service, start_link, []}},
+        #{id => cache_service, start => {cache_service, start_link, []}}
     ],
     {ok, {SupFlags, ChildSpecs}}.
 

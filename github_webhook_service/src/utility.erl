@@ -13,8 +13,8 @@
 -export([create_database_connection/0, query/3]).
 
 create_database_connection() ->
-    DBCredentialsFile = application:get_env(github_webhook_service_app, database_credentials),
-    DBCredentials = file:consult(DBCredentialsFile),
+    DBCredentialsFile = "database_credentials.config",
+    {ok, DBCredentials} = file:consult(DBCredentialsFile),
     case epgsql:connect(maps:from_list(DBCredentials)) of
         {error, Reason} -> lager:error("Database connection error of ~p", [Reason]), error;
         Other -> Other
