@@ -47,8 +47,7 @@ def clone():
     )
     if result.returncode != 0:
         with open("result.json", "w") as f:
-            f.write(json.dumps({"score" : total}))
-        print(result.stderr)
+            f.write(json.dumps({"score" : -1}))
         sys.exit(1)
 
 
@@ -62,7 +61,7 @@ def prepare():
         shutil.copy("./django/entrypoint.sh", repo_path)
     elif technology == "dotnet":
         with open("result.json", "w") as f:
-            f.write(json.dumps({"score" : total}))
+            f.write(json.dumps({"score" : -1}))
         sys.exit(1)
 
 
@@ -78,8 +77,7 @@ def before():
     )
     if result.returncode != 0:
         with open("result.json", "w") as f:
-            f.write(json.dumps({"score" : total}))
-        print(result.stderr)
+            f.write(json.dumps({"score" : -1}))
         sys.exit(1)
 
 
@@ -95,7 +93,7 @@ def after():
     )
     if result.returncode != 0:
         with open("result.json", "w") as f:
-            f.write(json.dumps({"score" : total}))
+            f.write(json.dumps({"score" : -1}))
         sys.exit(1)
 
 
