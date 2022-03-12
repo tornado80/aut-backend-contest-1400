@@ -5,7 +5,8 @@ import docker
 import sys
 import subprocess
 import judge
-from time import sleep
+from pathlib import Path
+import fileinput
 
 technology = sys.argv[1]
 delivery = sys.argv[2]
@@ -83,6 +84,19 @@ def before():
         raise Exception("Error when docker-compose up")
 
 
+def change_settings_py():
+    result = list(Path(delivery_path).rglob("settings.py"))
+    if len(result) != 1:
+        return
+
+    file = result[0]
+    for line in fileinput.input(file, inplace=True):
+        if 'ALLOWED_HOSTS' in line:
+            print('ALLOWED_HOSTS=["*"];')
+        else:
+            print(line, end='')
+
+
 def after():
     result = subprocess.run(
         "/usr/local/bin/docker-compose down",
@@ -103,6 +117,7 @@ def do_judge(no_checkout = False):
     j = judge.Judge("http://localhost:8000")
     clear()
     clone(no_checkout)
+    change_settings_py()
     prepare()
     total = 0
     for i, (test, score) in enumerate(judge.tests, 1):

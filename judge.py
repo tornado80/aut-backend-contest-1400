@@ -31,7 +31,7 @@ class Judge():
     def request(self, method, url, token=None, data=None):
         import requests
         headers = {
-            'Authorization': token,
+            'Authorization': f'Bearer {token}' if token else None,
             'Content-Type': "application/json"
         }
         return requests.request(method, url, headers=headers, data=json.dumps(data))
@@ -88,23 +88,52 @@ class Judge():
         return self.request('POST', url, token=admin_token, data={"joinRequestId": join_request_id})
 
 
+    def is_system_up(self):
+        res = self.request('GET', f'{self.host}/api/v1/blah/blah')
+        self._assertEqual(res.status_code, 404)
+
     def test_sign_up_work_with_proper_data(self):
+        res = self.ـsignup(email='hamidif@gmail.com')
+        self._assertEqual(200, res.status_code)
+
+
+    def test_email_is_in_jwt_token_of_signup(self):
         res = self.ـsignup(email='hamidif@gmail.com')
         self._assertEqual(200, res.status_code)
         jwt_payload = self.__extract_jwt_payload(res.json()['token'])
         self._assertEqual(True, 'email' in jwt_payload)
-        self._assertEqual(True, 'userId' in jwt_payload)
         self._assertEqual('hamidif@gmail.com', jwt_payload['email'])
+    
+
+    def test_user_id_is_in_jwt_token_of_signup(self):
+        res = self.ـsignup(email='hamidif@gmail.com')
+        self._assertEqual(200, res.status_code)
+        jwt_payload = self.__extract_jwt_payload(res.json()['token'])
+        self._assertEqual(True, 'userId' in jwt_payload)
 
 
     def test_login_works_with_proper_data(self):
         self.ـsignup(email='hamid@gmail.com', password="12345678@")
         res = self._login(email='hamid@gmail.com', password="12345678@")
+        self._assertEqual(200, res.status_code)
+
+    
+    def test_email_is_in_jwt_token_of_login(self):
+        self.ـsignup(email='hamid@gmail.com', password="12345678@")
+        res = self._login(email='hamid@gmail.com', password="12345678@")
         jwt_payload = self.__extract_jwt_payload(res.json()['token'])
         self._assertEqual(200, res.status_code)
         self._assertEqual(True, 'email' in jwt_payload)
-        self._assertEqual(True, 'userId' in jwt_payload)
         self._assertEqual('hamid@gmail.com', jwt_payload['email'])
+    
+    
+    def test_user_id_is_in_jwt_token_of_login(self):
+        self.ـsignup(email='hamid@gmail.com', password="12345678@")
+        res = self._login(email='hamid@gmail.com', password="12345678@")
+        jwt_payload = self.__extract_jwt_payload(res.json()['token'])
+        self._assertEqual(200, res.status_code)
+        self._assertEqual(True, 'userId' in jwt_payload)    
+
 
     def test_create_group_works_for_new_user(self):
         res = self.ـsignup()
@@ -117,6 +146,7 @@ class Judge():
         self._assertEqual(True, 'message' in res.json())
         self._assertEqual(2, len(res.json().keys()))
         self._assertEqual(True, 'id' in res.json()['group'])
+
 
     def test_can_get_groups_after_successfully_created(self):
         res_1 = self.ـsignup(email="gmail1@gmail.com")
@@ -138,6 +168,7 @@ class Judge():
         self._assertEqual("abc", res.json()['groups'][1]['name'])
         self._assertEqual("abcdef", res.json()['groups'][1]['description'])
 
+
     def test_new_user_can_send_join_request_to_a_group(self):
         res_1 = self.ـsignup(email="gmail1@gmail.com")
         token_1 = res_1.json()['token']
@@ -151,6 +182,7 @@ class Judge():
         self._assertEqual(True, 'message' in res.json())
         self._assertEqual(1, len(res.json().keys()))
         self._assertEqual("successfull", res.json()['message'])
+
 
     def test_user_can_see_his_join_requests(self):
         res_1 = self.ـsignup(email="gmail1@gmail.com")
@@ -226,6 +258,7 @@ class Judge():
         self._assertEqual(user_3_id, response.json()['joinRequests'][0]['userId'])
         self._assertEqual(user_2_id, response.json()['joinRequests'][1]['userId'])
 
+
     def test_join_member_and_group_data_works(self):
         # admin register + group creation
         res_1 = self.ـsignup(email="gmail1@gmail.com")
@@ -274,14 +307,22 @@ class Judge():
     #     group_2 = self._get_own_group(token_2)
 
 tests = [
-    ('test_sign_up_work_with_proper_data', 2),
-    ('test_login_works_with_proper_data', 2),
+    ('is_system_up', 1),
+
+    ('test_sign_up_work_with_proper_data', 1),
+    ('test_user_id_is_in_jwt_token_of_signup', 1),
+    ('test_email_is_in_jwt_token_of_signup', 1),
+
+    ('test_login_works_with_proper_data', 1),
+    ('test_user_id_is_in_jwt_token_of_login', 1),
+    ('test_email_is_in_jwt_token_of_login', 1),
+
     ('test_create_group_works_for_new_user', 3),
     ('test_can_get_groups_after_successfully_created', 5),
     ('test_new_user_can_send_join_request_to_a_group', 5),
     ('test_user_can_see_his_join_requests', 3),
-    ('test_admin_can_get_join_requests', 2),
-    ('test_join_member_and_group_data_works', 1)
+    ('test_admin_can_get_join_requests', 3),
+    ('test_join_member_and_group_data_works', 5)
 ]
 
 
