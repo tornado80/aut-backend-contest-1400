@@ -22,3 +22,70 @@
      Reason:     {{badmatch,error},[{cache_service,load_cache,0,[{file,"/home/amirhosein/Documents/aut-backend-contest-1400/github_webhook_service/src/cache_service.erl"},{line,57}]},{cache_service,init,1,[{file,"/home/amirhosein/Documents/aut-backend-contest-1400/github_webhook_service/src/cache_service.erl"},{line,30}]},{gen_server,init_it,2,[{file,"gen_server.erl"},{line,423}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,390}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}
      Offender:   [{pid,undefined},{id,cache_service},{mfargs,{cache_service,start_link,[]}},{restart_type,permanent},{significant,false},{shutdown,5000},{child_type,worker}]
 
+2022-03-12 11:35:35 =ERROR REPORT====
+** Generic server database_service terminating 
+** Last message in was get_submissions_in_queue
+** When Server state == {database_service_state,<0.378.0>}
+** Reason for termination ==
+** {{badmatch,error},[{database_service,handle_call,3,[{file,"/home/amirhosein/aut-backend-contest-1400/src/database_service.erl"},{line,42}]},{gen_server,try_handle_call,4,[{file,"gen_server.erl"},{line,721}]},{gen_server,handle_msg,6,[{file,"gen_server.erl"},{line,750}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}
+** Client <0.302.0> stacktrace
+** [{gen,do_call,4,[{file,"gen.erl"},{line,233}]},{gen_server,call,2,[{file,"gen_server.erl"},{line,235}]},{submission_queue,reload_from_db,0,[{file,"/home/amirhosein/aut-backend-contest-1400/src/submission_queue.erl"},{line,32}]},{erl_eval,do_apply,6,[{file,"erl_eval.erl"},{line,689}]},{shell,exprs,7,[{file,"shell.erl"},{line,686}]},{shell,eval_exprs,7,[{file,"shell.erl"},{line,642}]},{shell,eval_loop,3,[{file,"shell.erl"},{line,627}]}]
+2022-03-12 11:35:35 =CRASH REPORT====
+  crasher:
+    initial call: database_service:init/1
+    pid: <0.376.0>
+    registered_name: database_service
+    exception error: {{badmatch,error},[{database_service,handle_call,3,[{file,"/home/amirhosein/aut-backend-contest-1400/src/database_service.erl"},{line,42}]},{gen_server,try_handle_call,4,[{file,"gen_server.erl"},{line,721}]},{gen_server,handle_msg,6,[{file,"gen_server.erl"},{line,750}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}
+    ancestors: [github_webhook_service_sup,<0.360.0>]
+    message_queue_len: 0
+    messages: []
+    links: [<0.374.0>,<0.378.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 2586
+    stack_size: 29
+    reductions: 5849
+  neighbours:
+    neighbour: [{pid,<0.378.0>},{registered_name,[]},{initial_call,{epgsql_sock,init,['Argument__1']}},{current_function,{gen_server,loop,7}},{ancestors,[database_service,github_webhook_service_sup,<0.360.0>]},{message_queue_len,0},{links,[<0.376.0>,#Port<0.38>]},{trap_exit,false},{status,waiting},{heap_size,4185},{stack_size,12},{reductions,83675},{current_stacktrace,[{gen_server,loop,7,[{file,"gen_server.erl"},{line,443}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}]
+2022-03-12 11:35:35 =SUPERVISOR REPORT====
+     Supervisor: {local,github_webhook_service_sup}
+     Context:    child_terminated
+     Reason:     {{badmatch,error},[{database_service,handle_call,3,[{file,"/home/amirhosein/aut-backend-contest-1400/src/database_service.erl"},{line,42}]},{gen_server,try_handle_call,4,[{file,"gen_server.erl"},{line,721}]},{gen_server,handle_msg,6,[{file,"gen_server.erl"},{line,750}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}
+     Offender:   [{pid,<0.376.0>},{id,database_service},{mfargs,{database_service,start_link,[]}},{restart_type,permanent},{significant,false},{shutdown,5000},{child_type,worker}]
+
+2022-03-12 11:36:01 =ERROR REPORT====
+** Generic server database_service terminating 
+** Last message in was get_submissions_in_queue
+** When Server state == {database_service_state,<0.389.0>}
+** Reason for termination ==
+** {{badmatch,error},[{database_service,handle_call,3,[{file,"/home/amirhosein/aut-backend-contest-1400/src/database_service.erl"},{line,42}]},{gen_server,try_handle_call,4,[{file,"gen_server.erl"},{line,721}]},{gen_server,handle_msg,6,[{file,"gen_server.erl"},{line,750}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}
+** Client <0.390.0> stacktrace
+** [{gen,do_call,4,[{file,"gen.erl"},{line,233}]},{gen_server,call,2,[{file,"gen_server.erl"},{line,235}]},{erl_eval,do_apply,6,[{file,"erl_eval.erl"},{line,689}]},{shell,exprs,7,[{file,"shell.erl"},{line,686}]},{shell,eval_exprs,7,[{file,"shell.erl"},{line,642}]},{shell,eval_loop,3,[{file,"shell.erl"},{line,627}]}]
+2022-03-12 11:36:01 =CRASH REPORT====
+  crasher:
+    initial call: database_service:init/1
+    pid: <0.387.0>
+    registered_name: database_service
+    exception error: {{badmatch,error},[{database_service,handle_call,3,[{file,"/home/amirhosein/aut-backend-contest-1400/src/database_service.erl"},{line,42}]},{gen_server,try_handle_call,4,[{file,"gen_server.erl"},{line,721}]},{gen_server,handle_msg,6,[{file,"gen_server.erl"},{line,750}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}
+    ancestors: [github_webhook_service_sup,<0.360.0>]
+    message_queue_len: 0
+    messages: []
+    links: [<0.374.0>,<0.389.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 2586
+    stack_size: 29
+    reductions: 5760
+  neighbours:
+    neighbour: [{pid,<0.389.0>},{registered_name,[]},{initial_call,{epgsql_sock,init,['Argument__1']}},{current_function,{gen_server,loop,7}},{ancestors,[database_service,github_webhook_service_sup,<0.360.0>]},{message_queue_len,0},{links,[<0.387.0>,#Port<0.40>]},{trap_exit,false},{status,waiting},{heap_size,2586},{stack_size,12},{reductions,83256},{current_stacktrace,[{gen_server,loop,7,[{file,"gen_server.erl"},{line,443}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}]
+2022-03-12 11:36:01 =SUPERVISOR REPORT====
+     Supervisor: {local,github_webhook_service_sup}
+     Context:    child_terminated
+     Reason:     {{badmatch,error},[{database_service,handle_call,3,[{file,"/home/amirhosein/aut-backend-contest-1400/src/database_service.erl"},{line,42}]},{gen_server,try_handle_call,4,[{file,"gen_server.erl"},{line,721}]},{gen_server,handle_msg,6,[{file,"gen_server.erl"},{line,750}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}
+     Offender:   [{pid,<0.387.0>},{id,database_service},{mfargs,{database_service,start_link,[]}},{restart_type,permanent},{significant,false},{shutdown,5000},{child_type,worker}]
+
+2022-03-12 11:38:21 =ERROR REPORT====
+Error in process <0.387.0> with exit value:
+{{badmatch,0},[{submission_queue,judge,1,[{file,"/home/amirhosein/aut-backend-contest-1400/src/submission_queue.erl"},{line,144}]}]}
