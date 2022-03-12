@@ -35,10 +35,10 @@ def clear():
             client.images.remove(image.short_id, force=True)
 
 
-def clone():
+def clone(no_checkout):
     os.mkdir(delivery_path)
     result = subprocess.run(
-        f"git clone {clone_url} && cd {repo_name} && git checkout {commit_id}",
+        f"git clone {clone_url}" if no_checkout else f"git clone {clone_url} && cd {repo_name} && git checkout {commit_id}",
         capture_output=False,
         cwd=delivery_path,
         shell=True,
@@ -48,7 +48,7 @@ def clone():
     if result.returncode != 0:
         with open("result.json", "w") as f:
             f.write(json.dumps({"score" : -1}))
-        sys.exit(1)
+        raise Exception("Error while cloning repository")
 
 
 def prepare():
@@ -62,7 +62,7 @@ def prepare():
     elif technology == "dotnet":
         with open("result.json", "w") as f:
             f.write(json.dumps({"score" : -1}))
-        sys.exit(1)
+        raise Exception("Error while preparing judge environment")
 
 
 def before():
@@ -78,7 +78,7 @@ def before():
     if result.returncode != 0:
         with open("result.json", "w") as f:
             f.write(json.dumps({"score" : -1}))
-        sys.exit(1)
+        raise Exception("Error when docker-compose up")
 
 
 def after():
@@ -94,13 +94,13 @@ def after():
     if result.returncode != 0:
         with open("result.json", "w") as f:
             f.write(json.dumps({"score" : -1}))
-        sys.exit(1)
+        raise Exception("Error when docker-compose down")
 
 
-def do_judge():
+def do_judge(no_checkout = False):
     j = judge.Judge("http://localhost:8000")
     clear()
-    clone()
+    clone(no_checkout)
     prepare()
     total = 0
     for i, (test, score) in enumerate(judge.tests, 1):
@@ -120,4 +120,5 @@ def do_judge():
         f.write(json.dumps({"score" : total}))
     clear()
 
-do_judge()
+if __name__ == "__main__":
+    do_judge()
