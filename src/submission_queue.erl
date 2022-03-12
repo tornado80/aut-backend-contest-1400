@@ -133,9 +133,8 @@ judge(
         },
         team = Team = #submission_team{
             team_technology = Technology
-        },
-        score = Score}
-    ) ->
+        }
+    }) ->
     Command = io_lib:format("./judge.sh ~s ~s ~s ~s ~s",
         [Technology, Delivery, RepositoryCloneUrl, RepositoryName, HeadCommitId]),
     io:format("Preparing result.json~n"),
