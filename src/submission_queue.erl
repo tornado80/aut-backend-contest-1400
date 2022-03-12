@@ -80,12 +80,7 @@ handle_cast({judge_done, Status, Submission},
             queue = Queue}) ->
     io:format("Judge result received, sending results to database~n"),
     database_service:update_score(Status, Submission),
-    [NewCurrent | NewQueue] = Queue,
-    NewState = #submission_queue_state{
-        current = NewCurrent,
-        queue = NewQueue
-    },
-    spawn_judge(NewCurrent),
+    NewState = check_queue(Queue),
     {noreply, NewState};
 handle_cast(_Request, State = #submission_queue_state{}) ->
     {noreply, State}.
@@ -102,6 +97,19 @@ code_change(_OldVsn, State = #submission_queue_state{}, _Extra) ->
 %%%===================================================================
 %%% Internal functions
 %%%===================================================================
+
+state_builder(Current, Queue) ->
+    #submission_queue_state{
+        current = Current,
+        queue = Queue
+    }.
+
+check_queue([]) ->
+    state_builder(none, []);
+check_queue([NewCurrent | NewQueue]) ->
+    NewState = state_builder(NewCurrent, NewQueue),
+    spawn_judge(NewCurrent),
+    NewState.
 
 spawn_judge(Submission) ->
     io:format("Spawning the judge process for respository ~p and submission ~p~n",
