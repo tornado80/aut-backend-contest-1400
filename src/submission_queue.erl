@@ -29,7 +29,12 @@ insert_submission_done(Submission) ->
     gen_server:cast(?MODULE, {insert_submission_done, Submission}).
 
 reload_from_db() ->
-    gen_server:cast(?MODULE, reload_from_db).
+    Submissions = database_service:get_submissions_in_queue(),
+    lists:foreach(
+        fun(Submission) ->
+            gen_server:cast(?MODULE, {insert_submission_done, Submission})
+        end,
+        Submissions).
 
 %%%===================================================================
 %%% Spawning and gen_server implementation
@@ -40,6 +45,7 @@ start_link() ->
 
 init([]) ->
     filelib:ensure_dir("/home/amirhosein/judge/"),
+    filelib:ensure_dir("/home/amirhosein/uploads/"),
     {ok, #submission_queue_state{
         queue = [],
         current = none}}.
@@ -52,8 +58,12 @@ handle_cast({insert_submission_done, Submission},
             current = Current,
             queue = Queue}) ->
     {NewCurrent, NewQueue} = case Current of
-        none -> spawn(submission_queue, judge, [Submission]), {Submission, Queue};
-        _Other -> {Current, Queue ++ [Submission]}
+        none ->
+            spawn_judge(Submission),
+            {Submission, Queue};
+        _Other ->
+            io:format("Inserting submission in queue~n"),
+            {Current, Queue ++ [Submission]}
     end,
     NewState = #submission_queue_state{
         current = NewCurrent,
@@ -68,16 +78,15 @@ handle_cast({judge_done, Status, Submission},
         #submission_queue_state{
             current = _Current,
             queue = Queue}) ->
+    io:format("Judge result received, sending results to database~n"),
     database_service:update_score(Status, Submission),
     [NewCurrent | NewQueue] = Queue,
     NewState = #submission_queue_state{
         current = NewCurrent,
         queue = NewQueue
     },
-    spawn(submission_queue, judge, [NewCurrent]),
+    spawn_judge(NewCurrent),
     {noreply, NewState};
-handle_cast(reload_from_db, State = #submission_queue_state{}) ->
-    {noreply, State};
 handle_cast(_Request, State = #submission_queue_state{}) ->
     {noreply, State}.
 
@@ -93,6 +102,14 @@ code_change(_OldVsn, State = #submission_queue_state{}, _Extra) ->
 %%%===================================================================
 %%% Internal functions
 %%%===================================================================
+
+spawn_judge(Submission) ->
+    io:format("Spawning the judge process for respository ~p and submission ~p~n",
+        [
+            Submission#submission.repository#submission_repository.repository_full_name,
+            Submission#submission.repository#submission_repository.delivery_guid
+        ]),
+    spawn(submission_queue, judge, [Submission]).
 
 fill_submission_with_team_id(Submission = #submission{repository = Repository}) ->
     {TeamId, TeamName, TeamTechnology} = cache_service:get_team_details(Submission),
@@ -119,8 +136,8 @@ judge(
         },
         score = Score}
     ) ->
-    Command = io_lib:format("conda run -n judge-environment --no-capture-output --live-stream python main.py ~s ~s ~s ~s ~s &> /home/amirhosein/judge/~s.log",
-        [<<"django">>, Delivery, RepositoryCloneUrl, RepositoryName, HeadCommitId, Delivery]),
+    Command = io_lib:format("./judge.sh ~s ~s ~s ~s ~s",
+        [Technology, Delivery, RepositoryCloneUrl, RepositoryName, HeadCommitId]),
     file:write_file("result.json", jsx:encode(#{<<"score">> => 0})),
     Result = os:cmd(lists:flatten(Command)),
     {ok, Content} = file:read_file("result.json"),
