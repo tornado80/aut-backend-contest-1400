@@ -31,7 +31,7 @@ class Judge():
     def request(self, method, url, token=None, data=None):
         import requests
         headers = {
-            'Authorization': f'Bearer {token}' if token else None,
+            'Authorization': token,
             'Content-Type': "application/json"
         }
         return requests.request(method, url, headers=headers, data=json.dumps(data))
