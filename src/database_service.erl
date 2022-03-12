@@ -41,9 +41,9 @@ init([]) ->
 handle_call(get_submissions_in_queue, _From, State = #database_service_state{db_connection = DBConnection}) ->
     {ok, _Columns, Rows} = utility:query(
         DBConnection,
-        "SELECT delivery_guid, repository_full_name, repository_name, repository_clone_url,
-            repository_owner_login, head_commit_id, head_commit_message, head_commit_timestamp,
-            pushed_at_timestamp, technology
+        "SELECT s.delivery_guid, s.repository_full_name, s.repository_name, s.repository_clone_url,
+            s.repository_owner_login, s.head_commit_id, s.head_commit_message, s.head_commit_timestamp,
+            s.pushed_at_timestamp, t.technology
             FROM submission as s, team as t WHERE s.repository_full_name = t.repository_full_name AND status = $1",
         [<<"queue">>]
     ),

@@ -110,12 +110,12 @@ def do_judge(no_checkout = False):
             subprocess.run("while ! httping -qc1 http://localhost:8000 ; do sleep 1 ; done", shell=True, timeout=10)
             getattr(j, test)()
             total = total + score
-            print(f'{i}. {test_name}: PASSED')
+            print(f'{i}. {test_name}: PASSED', flush=True)
         except Exception:
-            print(f'{i}. {test_name}: FAILED')
+            print(f'{i}. {test_name}: FAILED', flush=True)
         finally:
             after()
-    print(f'\nTotal score: {total}/{sum(score for test, score in judge.tests)}')
+    print(f'\nTotal score: {total}/{sum(score for test, score in judge.tests)}', flush=True)
     with open("result.json", "w") as f:
         f.write(json.dumps({"score" : total}))
     clear()
