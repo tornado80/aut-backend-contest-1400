@@ -61,7 +61,7 @@ handle_cast({update_score, Status, Submission}, State = #database_service_state{
     } = Submission,
     utility:query(
         DBConnection,
-        "UPDATE submission SET status = $1 AND score = $2 WHERE delivery_guid = $3",
+        "UPDATE submission SET status = $1, score = $2 WHERE delivery_guid = $3",
         [Status, Score, Delivery]
     ),
     {noreply, State};
