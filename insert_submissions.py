@@ -18,18 +18,19 @@ for i in range(1, len(result)):
     print("inserting", row[1])
     if row[6] == "":
         continue
-    cur.execute("""INSERT INTO submission ("
-                delivery_guid,
-                repository_full_name,
-                repository_name,
-                repository_clone_url,
-                repository_owner_login,
-                head_commit_id,
-                head_commit_message,
-                head_commit_timestamp,
-                pushed_at_timestamp,
-                status
-                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
+    cur.execute("""
+        INSERT INTO submission (
+            delivery_guid,
+            repository_full_name,
+            repository_name,
+            repository_clone_url,
+            repository_owner_login,
+            head_commit_id,
+            head_commit_message,
+            head_commit_timestamp,
+            pushed_at_timestamp,
+            status
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
             (f"{row[3]}-{row[4]}-latest",
              f"{row[3]}/{row[4]}",
              row[4],
@@ -38,6 +39,7 @@ for i in range(1, len(result)):
              row[6],
              "commit-message",
              "commit-timestamp",
+             0,
              "queue"))
 conn.commit()
 cur.close()
