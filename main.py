@@ -26,6 +26,7 @@ def clear():
         if container.status == "running":
             container.stop()
         container.remove(force=True)
+    client.containers.prune()
 
     # clear images except "python:3.9.6-alpine" and "postgres:13.0-alpine"
     for image in client.images.list():
