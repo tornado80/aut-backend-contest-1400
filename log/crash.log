@@ -89,3 +89,99 @@
 2022-03-12 11:38:21 =ERROR REPORT====
 Error in process <0.387.0> with exit value:
 {{badmatch,0},[{submission_queue,judge,1,[{file,"/home/amirhosein/aut-backend-contest-1400/src/submission_queue.erl"},{line,144}]}]}
+2022-03-12 11:55:05 =ERROR REPORT====
+Error in process <0.386.0> with exit value:
+{{badmatch,0},[{submission_queue,judge,1,[{file,"/home/amirhosein/aut-backend-contest-1400/src/submission_queue.erl"},{line,147}]}]}
+2022-03-12 12:02:42 =ERROR REPORT====
+Error in process <0.386.0> with exit value:
+{{badmatch,0},[{submission_queue,judge,1,[{file,"/home/amirhosein/aut-backend-contest-1400/src/submission_queue.erl"},{line,148}]}]}
+2022-03-12 12:08:01 =ERROR REPORT====
+** Generic server <0.378.0> terminating 
+** Last message in was {command,epgsql_cmd_equery,{{statement,[],[],[bool,int4,text],[{16,bool,false},{23,int4,false},{25,text,false}]},[{bool,<<"judged">>},{int4,0},{text,<<"207c8bd4-a169-11ec-8a64-375e7f324899">>}]}}
+** When Server state == {state,gen_tcp,#Port<0.38>,<<>>,{11262,-1442531210},on_message,{codec,#{},[null,undefined],{oid_db,#{869 => {type,869,inet,false,undefined,epgsql_codec_net,[]},1001 => {type,1001,bytea,true,17,epgsql_codec_text,[]},23 => {type,23,int4,false,undefined,epgsql_codec_integer,[]},775 => {type,775,macaddr8,true,774,epgsql_codec_net,[]},3926 => {type,3926,int8range,false,undefined,epgsql_codec_intrange,[]},1040 => {type,1040,macaddr,true,829,epgsql_codec_net,[]},1186 => {type,1186,interval,false,undefined,epgsql_codec_datetime,epgsql_idatetime},774 => {type,774,macaddr8,false,undefined,epgsql_codec_net,[]},1187 => {type,1187,interval,true,1186,epgsql_codec_datetime,epgsql_idatetime},829 => {type,829,macaddr,false,undefined,epgsql_codec_net,[]},3802 => {type,3802,jsonb,false,undefined,epgsql_codec_json,[]},1015 => {type,1015,varchar,true,1043,epgsql_codec_text,[]},3905 => {type,3905,int4range,true,3904,epgsql_codec_intrange,[]},701 => {type,701,float8,false,undefined,epgsql_codec_float,[]},1000 => {type,1000,bool,true,16,epgsql_codec_boolean,[]},1009 => {type,1009,text,true,25,epgsql_codec_text,[]},25 => {type,25,text,false,undefined,epgsql_codec_text,[]},199 => {type,199,json,true,114,epgsql_codec_json,[]},1014 => {type,1014,bpchar,true,1042,epgsql_codec_bpchar,[]},1043 => {type,1043,varchar,false,undefined,epgsql_codec_text,[]},3911 => {type,3911,tstzrange,true,3910,epgsql_codec_timerange,epgsql_idatetime},2950 => {type,2950,uuid,false,undefined,epgsql_codec_uuid,[]},2951 => {type,2951,uuid,true,2950,epgsql_codec_uuid,[]},1083 => {type,1083,time,false,undefined,epgsql_codec_datetime,epgsql_idatetime},1007 => {type,1007,int4,true,23,epgsql_codec_integer,[]},20 => {type,20,int8,false,undefined,epgsql_codec_integer,[]},1183 => {type,1183,time,true,1083,epgsql_codec_datetime,epgsql_idatetime},3913 => {type,3913,daterange,true,3912,epgsql_codec_timerange,epgsql_idatetime},1082 => {type,1082,date,false,undefined,epgsql_codec_datetime,epgsql_idatetime},3807 => {type,3807,jsonb,true,3802,epgsql_codec_json,[]},3927 => {type,3927,int8range,true,3926,epgsql_codec_intrange,[]},3910 => {type,3910,tstzrange,false,undefined,epgsql_codec_timerange,epgsql_idatetime},1002 => {type,1002,char,true,18,epgsql_codec_bpchar,[]},17 => {type,17,bytea,false,undefined,epgsql_codec_text,[]},1005 => {type,1005,int2,true,21,epgsql_codec_integer,[]},3908 => {type,3908,tsrange,false,undefined,epgsql_codec_timerange,epgsql_idatetime},1182 => {type,1182,date,true,1082,epgsql_codec_datetime,epgsql_idatetime},1017 => {type,1017,point,true,600,epgsql_codec_geometric,[]},21 => {type,21,int2,false,undefined,epgsql_codec_integer,[]},1021 => {type,1021,float4,true,700,epgsql_codec_float,[]},1016 => {type,1016,int8,true,20,epgsql_codec_integer,[]},650 => {type,650,cidr,false,undefined,epgsql_codec_net,[]},1266 => {type,1266,timetz,false,undefined,epgsql_codec_datetime,epgsql_idatetime},1185 => {type,1185,timestamptz,true,1184,epgsql_codec_datetime,epgsql_idatetime},700 => {type,700,float4,false,undefined,epgsql_codec_float,[]},3904 => {type,3904,int4range,false,undefined,epgsql_codec_intrange,[]},600 => {type,600,point,false,undefined,epgsql_codec_geometric,[]},1042 => {type,1042,bpchar,false,undefined,epgsql_codec_bpchar,[]},1270 => {type,1270,timetz,true,1266,epgsql_codec_datetime,epgsql_idatetime},1114 => {type,1114,timestamp,false,undefined,epgsql_codec_datetime,epgsql_idatetime},1184 => {type,1184,timestamptz,false,undefined,epgsql_codec_datetime,epgsql_idatetime},3909 => {type,3909,tsrange,true,3908,epgsql_codec_timerange,epgsql_idatetime},3912 => {type,3912,daterange,false,undefined,epgsql_codec_timerange,epgsql_idatetime},1022 => {type,1022,float8,true,701,epgsql_codec_float,[]},114 => {type,114,json,false,undefined,epgsql_codec_json,[]},651 => {type,651,cidr,true,650,epgsql_codec_net,[]},1115 => {type,1115,timestamp,true,1114,epgsql_codec_datetime,epgsql_idatetime},18 => {type,18,char,false,undefined,epgsql_codec_bpchar,[]},1041 => {type,1041,inet,true,869,epgsql_codec_net,[]},16 => {type,16,bool,false,undefined,epgsql_codec_boolean,[]}},#{{inet,true} => 1041,{varchar,true} => 1015,{int4,false} => 23,{date,true} => 1182,{timetz,true} => 1270,{int8,true} => 1016,{macaddr8,false} => 774,{uuid,true} => 2951,{timestamp,true} => 1115,{tstzrange,true} => 3911,{bool,true} => 1000,{bpchar,false} => 1042,{timetz,false} => 1266,{tsrange,true} => 3909,{json,false} => 114,{varchar,false} => 1043,{macaddr,true} => 1040,{interval,false} => 1186,{text,true} => 1009,{point,true} => 1017,{jsonb,false} => 3802,{daterange,false} => 3912,{macaddr,false} => 829,{timestamp,false} => 1114,{int4,true} => 1007,{int8range,false} => 3926,{bool,false} => 16,{tstzrange,false} => 3910,{inet,false} => 869,{json,true} => 199,{bpchar,true} => 1014,{int2,true} => 1005,{uuid,false} => 2950,{char,false} => 18,{int2,false} => 21,{cidr,false} => 650,{macaddr8,true} => 775,{float4,true} => 1021,{time,false} => 1083,{point,false} => 600,{float8,true} => 1022,{int8,false} => 20,{jsonb,true} => 3807,{float4,false} => 700,{char,true} => 1002,{bytea,true} => 1001,{bytea,false} => 17,{int8range,true} => 3927,{timestamptz,false} => 1184,{int4range,true} => 3905,{timestamptz,true} => 1185,{time,true} => 1183,{tsrange,false} => 3908,{cidr,true} => 651,{text,false} => 25,{interval,true} => 1187,{float8,false} => 701,{daterange,true} => 3913,{date,false} => 1082,{int4range,false} => 3904}}},{[],[]},undefined,undefined,undefined,undefined,[{<<"application_name">>,<<>>},{<<"client_encoding">>,<<"UTF8">>},{<<"DateStyle">>,<<"ISO, MDY">>},{<<"default_transaction_read_only">>,<<"off">>},{<<"in_hot_standby">>,<<"off">>},{<<"integer_datetimes">>,<<"on">>},{<<"IntervalStyle">>,<<"postgres">>},{<<"is_superuser">>,<<"on">>},{<<"server_encoding">>,<<"UTF8">>},{<<"server_version">>,<<"14.2 (Ubuntu 14.2-1.pgdg18.04+1)">>},{<<"session_authorization">>,<<"judge_user">>},{<<"standard_conforming_strings">>,<<"on">>},{<<"TimeZone">>,<<"Etc/UTC">>}],information_redacted,[],undefined,73,undefined,undefined,#{database => "judge_db",host => "localhost",port => 5432,timeout => 10000}}
+** Reason for termination ==
+** {function_clause,[{epgsql_codec_boolean,encode,[<<"judged">>,bool,[]],[{file,"/home/amirhosein/aut-backend-contest-1400/_build/default/lib/epgsql/src/datatypes/epgsql_codec_boolean.erl"},{line,26}]},{epgsql_binary,encode_value,2,[{file,"/home/amirhosein/aut-backend-contest-1400/_build/default/lib/epgsql/src/epgsql_binary.erl"},{line,271}]},{epgsql_wire,encode_parameter,3,[{file,"/home/amirhosein/aut-backend-contest-1400/_build/default/lib/epgsql/src/epgsql_wire.erl"},{line,290}]},{epgsql_wire,encode_parameters,5,[{file,"/home/amirhosein/aut-backend-contest-1400/_build/default/lib/epgsql/src/epgsql_wire.erl"},{line,268}]},{epgsql_cmd_equery,execute,2,[{file,"/home/amirhosein/aut-backend-contest-1400/_build/default/lib/epgsql/src/commands/epgsql_cmd_equery.erl"},{line,44}]},{epgsql_sock,command_exec,4,[{file,"/home/amirhosein/aut-backend-contest-1400/_build/default/lib/epgsql/src/epgsql_sock.erl"},{line,329}]},{gen_server,try_handle_call,4,[{file,"gen_server.erl"},{line,721}]},{gen_server,handle_msg,6,[{file,"gen_server.erl"},{line,750}]}]}
+** Client database_service stacktrace
+** [{gen,do_call,4,[{file,"gen.erl"},{line,214}]},{gen_server,call,3,[{file,"gen_server.erl"},{line,243}]},{utility,query,3,[{file,"/home/amirhosein/aut-backend-contest-1400/src/utility.erl"},{line,24}]},{database_service,handle_cast,2,[{file,"/home/amirhosein/aut-backend-contest-1400/src/database_service.erl"},{line,62}]},{gen_server,try_dispatch,4,[{file,"gen_server.erl"},{line,695}]},{gen_server,handle_msg,6,[{file,"gen_server.erl"},{line,771}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]
+2022-03-12 12:08:01 =CRASH REPORT====
+  crasher:
+    initial call: epgsql_sock:init/1
+    pid: <0.378.0>
+    registered_name: []
+    exception error: {function_clause,[{epgsql_codec_boolean,encode,[<<"judged">>,bool,[]],[{file,"/home/amirhosein/aut-backend-contest-1400/_build/default/lib/epgsql/src/datatypes/epgsql_codec_boolean.erl"},{line,26}]},{epgsql_binary,encode_value,2,[{file,"/home/amirhosein/aut-backend-contest-1400/_build/default/lib/epgsql/src/epgsql_binary.erl"},{line,271}]},{epgsql_wire,encode_parameter,3,[{file,"/home/amirhosein/aut-backend-contest-1400/_build/default/lib/epgsql/src/epgsql_wire.erl"},{line,290}]},{epgsql_wire,encode_parameters,5,[{file,"/home/amirhosein/aut-backend-contest-1400/_build/default/lib/epgsql/src/epgsql_wire.erl"},{line,268}]},{epgsql_cmd_equery,execute,2,[{file,"/home/amirhosein/aut-backend-contest-1400/_build/default/lib/epgsql/src/commands/epgsql_cmd_equery.erl"},{line,44}]},{epgsql_sock,command_exec,4,[{file,"/home/amirhosein/aut-backend-contest-1400/_build/default/lib/epgsql/src/epgsql_sock.erl"},{line,329}]},{gen_server,try_handle_call,4,[{file,"gen_server.erl"},{line,721}]},{gen_server,handle_msg,6,[{file,"gen_server.erl"},{line,750}]}]}
+    ancestors: [database_service,github_webhook_service_sup,<0.360.0>]
+    message_queue_len: 0
+    messages: []
+    links: [<0.376.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 6772
+    stack_size: 29
+    reductions: 89410
+  neighbours:
+    neighbour: [{pid,<0.376.0>},{registered_name,database_service},{initial_call,{database_service,init,['Argument__1']}},{current_function,{gen,do_call,4}},{ancestors,[github_webhook_service_sup,<0.360.0>]},{message_queue_len,0},{links,[<0.374.0>,<0.378.0>]},{trap_exit,false},{status,waiting},{heap_size,6772},{stack_size,41},{reductions,2017},{current_stacktrace,[{gen,do_call,4,[{file,"gen.erl"},{line,214}]},{gen_server,call,3,[{file,"gen_server.erl"},{line,243}]},{utility,query,3,[{file,"/home/amirhosein/aut-backend-contest-1400/src/utility.erl"},{line,24}]},{database_service,handle_cast,2,[{file,"/home/amirhosein/aut-backend-contest-1400/src/database_service.erl"},{line,62}]},{gen_server,try_dispatch,4,[{file,"gen_server.erl"},{line,695}]},{gen_server,handle_msg,6,[{file,"gen_server.erl"},{line,771}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}]
+2022-03-12 12:08:01 =SUPERVISOR REPORT====
+     Supervisor: {local,github_webhook_service_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{epgsql_codec_boolean,encode,[<<"judged">>,bool,[]],[{file,"/home/amirhosein/aut-backend-contest-1400/_build/default/lib/epgsql/src/datatypes/epgsql_codec_boolean.erl"},{line,26}]},{epgsql_binary,encode_value,2,[{file,"/home/amirhosein/aut-backend-contest-1400/_build/default/lib/epgsql/src/epgsql_binary.erl"},{line,271}]},{epgsql_wire,encode_parameter,3,[{file,"/home/amirhosein/aut-backend-contest-1400/_build/default/lib/epgsql/src/epgsql_wire.erl"},{line,290}]},{epgsql_wire,encode_parameters,5,[{file,"/home/amirhosein/aut-backend-contest-1400/_build/default/lib/epgsql/src/epgsql_wire.erl"},{line,268}]},{epgsql_cmd_equery,execute,2,[{file,"/home/amirhosein/aut-backend-contest-1400/_build/default/lib/epgsql/src/commands/epgsql_cmd_equery.erl"},{line,44}]},{epgsql_sock,command_exec,4,[{file,"/home/amirhosein/aut-backend-contest-1400/_build/default/lib/epgsql/src/epgsql_sock.erl"},{line,329}]},{gen_server,try_handle_call,4,[{file,"gen_server.erl"},{line,721}]},{gen_server,handle_msg,6,[{file,"gen_server.erl"},{line,750}]}]}
+     Offender:   [{pid,<0.376.0>},{id,database_service},{mfargs,{database_service,start_link,[]}},{restart_type,permanent},{significant,false},{shutdown,5000},{child_type,worker}]
+
+2022-03-12 12:09:02 =ERROR REPORT====
+** Generic server submission_queue terminating 
+** Last message in was {'$gen_cast',{judge_done,<<"judged">>,{submission,{submission_repository,<<"01cd1abe-a169-11ec-9163-821d22c28276">>,<<"nimaafshar/NobaharBackend">>,<<"NobaharBackend">>,<<"https://github.com/nimaafshar/NobaharBackend.git">>,<<"nimaafshar">>,<<"694eaa30956f4ed79dae3ec598903e68d0f33619">>,<<"chat: send message">>,<<"2022-03-11T21:58:02+03:30">>,1647023291},{submission_team,<<"django">>,undefined,undefined},0}}}
+** When Server state == {submission_queue_state,none,[]}
+** Reason for termination ==
+** {{badmatch,[]},[{submission_queue,handle_cast,2,[{file,"/home/amirhosein/aut-backend-contest-1400/src/submission_queue.erl"},{line,83}]},{gen_server,try_dispatch,4,[{file,"gen_server.erl"},{line,695}]},{gen_server,handle_msg,6,[{file,"gen_server.erl"},{line,771}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}
+2022-03-12 12:09:02 =CRASH REPORT====
+  crasher:
+    initial call: submission_queue:init/1
+    pid: <0.390.0>
+    registered_name: submission_queue
+    exception error: {{badmatch,[]},[{submission_queue,handle_cast,2,[{file,"/home/amirhosein/aut-backend-contest-1400/src/submission_queue.erl"},{line,83}]},{gen_server,try_dispatch,4,[{file,"gen_server.erl"},{line,695}]},{gen_server,handle_msg,6,[{file,"gen_server.erl"},{line,771}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}
+    ancestors: [github_webhook_service_sup,<0.360.0>]
+    message_queue_len: 0
+    messages: []
+    links: [<0.374.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 1598
+    stack_size: 29
+    reductions: 924
+  neighbours:
+2022-03-12 12:09:02 =SUPERVISOR REPORT====
+     Supervisor: {local,github_webhook_service_sup}
+     Context:    child_terminated
+     Reason:     {{badmatch,[]},[{submission_queue,handle_cast,2,[{file,"/home/amirhosein/aut-backend-contest-1400/src/submission_queue.erl"},{line,83}]},{gen_server,try_dispatch,4,[{file,"gen_server.erl"},{line,695}]},{gen_server,handle_msg,6,[{file,"gen_server.erl"},{line,771}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}
+     Offender:   [{pid,<0.390.0>},{id,submission_queue},{mfargs,{submission_queue,start_link,[]}},{restart_type,permanent},{significant,false},{shutdown,5000},{child_type,worker}]
+
+2022-03-12 14:04:44 =ERROR REPORT====
+** Generic server submission_queue terminating 
+** Last message in was {'$gen_cast',{judge_done,<<"failed">>,{submission,{submission_repository,<<"3b5f5daa-a114-11ec-87dd-b5c491723b38">>,<<"erfansaberi/quera-mathcs-contest-django">>,<<"quera-mathcs-contest-django">>,<<"https://github.com/erfansaberi/quera-mathcs-contest-django.git">>,<<"erfansaberi">>,<<"23f72ae087a1560764d328843440f78d49fd633d">>,<<"Added requirements.txt">>,<<"2022-03-11T11:48:45+03:30">>,1646986880},{submission_team,<<"django">>,undefined,undefined},-1}}}
+** When Server state == {submission_queue_state,{submission,{submission_repository,<<"3b5f5daa-a114-11ec-87dd-b5c491723b38">>,<<"erfansaberi/quera-mathcs-contest-django">>,<<"quera-mathcs-contest-django">>,<<"https://github.com/erfansaberi/quera-mathcs-contest-django.git">>,<<"erfansaberi">>,<<"23f72ae087a1560764d328843440f78d49fd633d">>,<<"Added requirements.txt">>,<<"2022-03-11T11:48:45+03:30">>,1646986880},{submission_team,<<"django">>,undefined,undefined},undefined},[]}
+** Reason for termination ==
+** {{badmatch,[]},[{submission_queue,handle_cast,2,[{file,"/home/amirhosein/aut-backend-contest-1400/src/submission_queue.erl"},{line,83}]},{gen_server,try_dispatch,4,[{file,"gen_server.erl"},{line,695}]},{gen_server,handle_msg,6,[{file,"gen_server.erl"},{line,771}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}
+2022-03-12 14:04:44 =CRASH REPORT====
+  crasher:
+    initial call: submission_queue:init/1
+    pid: <0.363.0>
+    registered_name: submission_queue
+    exception error: {{badmatch,[]},[{submission_queue,handle_cast,2,[{file,"/home/amirhosein/aut-backend-contest-1400/src/submission_queue.erl"},{line,83}]},{gen_server,try_dispatch,4,[{file,"gen_server.erl"},{line,695}]},{gen_server,handle_msg,6,[{file,"gen_server.erl"},{line,771}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}
+    ancestors: [github_webhook_service_sup,<0.348.0>]
+    message_queue_len: 0
+    messages: []
+    links: [<0.362.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 6772
+    stack_size: 29
+    reductions: 8312
+  neighbours:
+2022-03-12 14:04:44 =SUPERVISOR REPORT====
+     Supervisor: {local,github_webhook_service_sup}
+     Context:    child_terminated
+     Reason:     {{badmatch,[]},[{submission_queue,handle_cast,2,[{file,"/home/amirhosein/aut-backend-contest-1400/src/submission_queue.erl"},{line,83}]},{gen_server,try_dispatch,4,[{file,"gen_server.erl"},{line,695}]},{gen_server,handle_msg,6,[{file,"gen_server.erl"},{line,771}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}
+     Offender:   [{pid,<0.363.0>},{id,submission_queue},{mfargs,{submission_queue,start_link,[]}},{restart_type,permanent},{significant,false},{shutdown,5000},{child_type,worker}]
+
