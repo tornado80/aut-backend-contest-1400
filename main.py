@@ -53,6 +53,8 @@ def clone():
 
 def prepare():
     if technology == "django":
+        if not os.path.exists(f"{repo_path}/requirements.txt"):
+            shutil.copy("./django/requirements.txt", repo_path)
         shutil.copy("./django/docker-compose.yml", delivery_path)
         shutil.copy("./django/env.db", delivery_path)
         shutil.copy("./django/env.dev", delivery_path)

@@ -138,19 +138,23 @@ judge(
     ) ->
     Command = io_lib:format("./judge.sh ~s ~s ~s ~s ~s",
         [Technology, Delivery, RepositoryCloneUrl, RepositoryName, HeadCommitId]),
+    io:format("Preparing result~n"),
     file:write_file("result.json", jsx:encode(#{<<"score">> => 0})),
-    Result = os:cmd(lists:flatten(Command)),
+    io:format("Executing judge.sh~n"),
+    os:cmd(lists:flatten(Command)),
+    io:format("Check score~n"),
     {ok, Content} = file:read_file("result.json"),
     Score = maps:get(<<"score">>, jsx:decode(Content)),
+    io:format("Score was ~p~n", [Score]),
     NewSubmission = #submission{
         repository = Repository,
         team = Team,
         score = Score
     },
     case Score < 0 of
-        true -> judge_done(<<"failed">>, Result, NewSubmission);
-        false -> judge_done(<<"judged">>, Result, NewSubmission)
+        true -> judge_done(<<"failed">>, NewSubmission);
+        false -> judge_done(<<"judged">>, NewSubmission)
     end.
 
-judge_done(Status, Result, Submission) ->
-    gen_server:cast(?MODULE, {judge_done, Status, Result, Submission}).
+judge_done(Status, Submission) ->
+    gen_server:cast(?MODULE, {judge_done, Status, Submission}).
