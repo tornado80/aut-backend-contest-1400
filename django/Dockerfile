@@ -15,9 +15,9 @@ RUN apk update \
 # install dependencies
 RUN pip install --upgrade pip
 COPY ./base-requirements.txt .
-COPY ./requirements.txt .
+#COPY ./requirements.txt .
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r base-requirements.txt
-RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
+#RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
 
 # pull official base image
 FROM python:3.9.6-alpine
@@ -37,7 +37,7 @@ WORKDIR $APP_HOME
 # install dependencies
 RUN apk update && apk add libpq
 COPY --from=builder /usr/src/app/wheels /wheels
-COPY --from=builder /usr/src/app/requirements.txt .
+#COPY --from=builder /usr/src/app/requirements.txt .
 COPY --from=builder /usr/src/app/base-requirements.txt .
 RUN pip install --no-cache /wheels/*
 

@@ -37,12 +37,15 @@ def clear():
 
 
 def clone(no_checkout):
+    if os.path.exists(delivery_path):
+        shutil.rmtree(delivery_path)
     os.mkdir(delivery_path)
     result = subprocess.run(
         f"git clone {clone_url}" if no_checkout else f"git clone {clone_url} && cd {repo_name} && git checkout {commit_id}",
         capture_output=False,
         cwd=delivery_path,
         shell=True,
+        timeout=10,
         stdout=sys.stdout,
         stderr=sys.stderr
     )
@@ -54,8 +57,6 @@ def clone(no_checkout):
 
 def prepare():
     if technology == "django":
-        if not os.path.exists(f"{repo_path}/requirements.txt"):
-            shutil.copy("./django/requirements.txt", repo_path)
         shutil.copy("./django/docker-compose.yml", delivery_path)
         shutil.copy("./django/env.db", delivery_path)
         shutil.copy("./django/env.dev", delivery_path)
