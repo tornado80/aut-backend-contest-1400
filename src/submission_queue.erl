@@ -138,12 +138,13 @@ judge(
     ) ->
     Command = io_lib:format("./judge.sh ~s ~s ~s ~s ~s",
         [Technology, Delivery, RepositoryCloneUrl, RepositoryName, HeadCommitId]),
-    io:format("Preparing result~n"),
+    io:format("Preparing result.json~n"),
     file:write_file("result.json", jsx:encode(#{<<"score">> => 0})),
     io:format("Executing judge.sh~n"),
     os:cmd(lists:flatten(Command)),
-    io:format("Check score~n"),
+    io:format("Read result.json~n"),
     {ok, Content} = file:read_file("result.json"),
+    io:format("Check score~n"),
     Score = maps:get(<<"score">>, jsx:decode(Content)),
     io:format("Score was ~p~n", [Score]),
     NewSubmission = #submission{
