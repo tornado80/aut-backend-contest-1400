@@ -16,10 +16,29 @@ result = sh.sheet1.get_all_values()
 for i in range(1, len(result)):
     row = result[i]
     print("inserting", row[1])
-    if row[3] == "":
+    if row[6] == "":
         continue
-    cur.execute("INSERT INTO delivery_guid (id, name, repository_full_name, technology, quera_email) VALUES (%s, %s, %s, %s, %s)",
-            (i, row[5], f"{row[3]}/{row[4]}", "django" if "Django" in row[2] else "dotnet", row[1]))
+    cur.execute("""INSERT INTO submission ("
+                delivery_guid,
+                repository_full_name,
+                repository_name,
+                repository_clone_url,
+                repository_owner_login,
+                head_commit_id,
+                head_commit_message,
+                head_commit_timestamp,
+                pushed_at_timestamp,
+                status
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
+            (f"{row[3]}-{row[4]}-latest",
+             f"{row[3]}/{row[4]}",
+             row[4],
+             row[5],
+             row[3],
+             row[6],
+             "commit-message",
+             "commit-timestamp",
+             "queue"))
 conn.commit()
 cur.close()
 conn.close()
