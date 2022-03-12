@@ -42,7 +42,10 @@ class Judge():
 
     def _get_user_id_from_token(self, token):
         jwt_payload = self.__extract_jwt_payload(token)
-        return jwt_payload['userId']
+        if 'userId' in token:
+            return jwt_payload['userId']
+        else:
+            return jwt_payload['user_id']
 
     def ـsignup(self, email="gmail@gmail.com", name="mohsen", password="12345678@"):
         url = f'{self.host}/api/v1/auth/signup/'
@@ -91,6 +94,7 @@ class Judge():
     def is_system_up(self):
         res = self.request('GET', f'{self.host}/api/v1/blah/blah')
         self._assertEqual(res.status_code, 404)
+
 
     def test_sign_up_work_with_proper_data(self):
         res = self.ـsignup(email='hamidif@gmail.com')
@@ -224,7 +228,7 @@ class Judge():
         self._assertEqual(200, response.status_code)
         self._assertEqual(True, 'message' in response.json())
         self._assertEqual(1, len(response.json().keys()))
-        self._assertEqual("successfull", response.json()['message'])
+        self._assertEqual(True, "successful" in response.json()['message'])
 
 
     def test_admin_can_get_join_requests(self):
@@ -282,7 +286,7 @@ class Judge():
         self._assertEqual(200, response_1.status_code)
         self._assertEqual(True, 'message' in response_1.json())
         self._assertEqual(1, len(response_1.json().keys()))
-        self._assertEqual("successfull", response_1.json()['message'])
+        self._assertEqual(True, "successful" in response_1.json()['message'])
 
         # check group info
         response_2 = self._get_my_group(token_user_1)
